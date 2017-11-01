@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "370731165765",
+    "firebase_url": "https://healthguide-dr.firebaseio.com",
+    "project_id": "healthguide-dr",
+    "storage_bucket": "healthguide-dr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370731165765:android:3c833f6b71bf0fc7",
+        "android_client_info": {
+          "package_name": "rkapoors.healthguide_dr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370731165765-rahlb72iup4krjekfr93utpm025t8090.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfX90OWn9-_NhiP1_9K9VxPPbvuYfDgg0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
