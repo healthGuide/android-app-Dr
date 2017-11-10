@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/content"
+    android:background="#fff">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="email"
+                android:inputType="textEmailAddress"
+                android:textColor="#000"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            >
+
+            <ImageView
+                android:id="@+id/fromcalbt"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/calendar"
+                android:layout_toStartOf="@+id/frombt"
+                android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/frombt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Date"
+                android:layout_marginTop="40dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                />
+
+            <TextView
+                android:id="@+id/fromdt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:padding="10dp"
+                android:layout_marginTop="70dp"
+                android:textStyle="italic"
+                android:textSize="18sp"
+                android:textColor="#000"
+                />
+
+            <ImageView
+                android:id="@+id/tocalbt"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/calendar"
+                android:layout_below="@+id/fromcalbt"
+                android:layout_toStartOf="@+id/tobt"
+                android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/tobt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Date"
+                android:layout_marginTop="60dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/frombt"
+                android:clickable="true"
+                />
+
+            <TextView
+                android:id="@+id/todt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="60dp"
+                android:textStyle="italic"
+                android:textSize="18sp"
+                android:padding="10dp"
+                android:layout_below="@+id/fromdt"
+                android:textColor="#000"
+                />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:text="CHECK"
+                android:id="@+id/chk"
+                android:textStyle="bold"
+                android:textColor="#125688"
+                android:background="@null"
+                android:textSize="25sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:layout_below="@+id/tobt"
+                />
+        </RelativeLayout>
+
+</RelativeLayout>
