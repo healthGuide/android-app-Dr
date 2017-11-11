@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -128,12 +129,15 @@ public class checkrecord extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(relativeLayout.getWindowToken(), 0);
+
                 if (TextUtils.isEmpty(mail.getText().toString())) {
                     Snackbar.make(relativeLayout, "Enter patient's email", Snackbar.LENGTH_LONG).show();
                     return;
                 }
 
-                ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                ConnectivityManager cm = (ConnectivityManager) checkrecord.this.getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
                 boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
@@ -147,10 +151,11 @@ public class checkrecord extends AppCompatActivity {
                     snackbar.show();
                 }
                 else{
-                    Intent chka = new Intent(getApplicationContext(), recorddata.class);
+                    Intent chka = new Intent(checkrecord.this, recorddata.class);
                     history.add(mail.getText().toString());
                     chka.putExtra("fromdate", fdt.getText().toString());
                     chka.putExtra("todate", tdt.getText().toString());
+                    chka.putExtra("patient",mail.getText().toString());
                     startActivity(chka);
                 }
             }
@@ -159,7 +164,7 @@ public class checkrecord extends AppCompatActivity {
 
     private void setautocompletesource()
     {
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,history.toArray(new String[history.size()]));
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(checkrecord.this,android.R.layout.simple_list_item_1,history.toArray(new String[history.size()]));
         mail.setAdapter(adapter);
     }
     private void addsearchinput(String input)

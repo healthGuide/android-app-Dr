@@ -4,9 +4,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:id="@+id/content"
     android:background="#fff">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -17,9 +23,11 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="email"
+                android:hint="patient's email"
                 android:inputType="textEmailAddress"
                 android:textColor="#000"
+                android:textColorHint="#000"
+                android:textStyle="italic"
                 />
         </android.support.design.widget.TextInputLayout>
 
@@ -110,9 +118,10 @@
                 android:background="@null"
                 android:textSize="25sp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="50dp"
                 android:layout_below="@+id/tobt"
                 />
         </RelativeLayout>
-
+    </LinearLayout>
+</ScrollView>
 </RelativeLayout>

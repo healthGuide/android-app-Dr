@@ -1,9 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rellayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="rkapoors.healthguide_dr.recorddata">
+    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mail"
+        android:layout_alignParentEnd="true"
+        android:textColor="#f00"
+        android:textStyle="italic"
+        android:padding="2dp"/>
+
+    <TextView
+        android:id="@+id/ftv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="From: "
+        android:textColor="#f00"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/mail"
+        android:padding="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fttv"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_toEndOf="@+id/ftv"
+        android:layout_below="@+id/mail"
+        android:padding="2dp"/>
+
+    <TextView
+        android:id="@+id/ttv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="   To: "
+        android:textColor="#f00"
+        android:layout_toEndOf="@+id/fttv"
+        android:layout_below="@+id/mail"
+        android:padding="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tttv"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_toEndOf="@+id/ttv"
+        android:layout_below="@+id/mail"
+        android:padding="2dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fetch Records"
+        android:id="@+id/fetchbt"
+        android:textAllCaps="false"
+        android:background="#efefef"
+        android:layout_below="@+id/ftv"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/fetchbt"/>
+</RelativeLayout>
