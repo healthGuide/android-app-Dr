@@ -2,8 +2,17 @@
 
 package rkapoors.healthguide_dr;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,7 +27,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +45,16 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
+    private FirebaseAuth.AuthStateListener authListener;
+    private FirebaseAuth auth;
+
+    boolean doubleBackToExitPressedOnce = false;
+    private TextView maildesc;
+    TextView naam;
+
+    FirebaseDatabase database;
+    DatabaseReference dbref;
 
     private DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -41,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
+
+        database=FirebaseDatabase.getInstance();
+        dbref=database.getReference();
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar!=null) {
@@ -58,13 +89,63 @@ public class MainActivity extends AppCompatActivity {
             actionBarDrawerToggle.syncState();
         }
 
+        ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if(!isConnected)
+        {
+            Snackbar snackbar=Snackbar.make(drawerLayout, "Check Internet Connection", Snackbar.LENGTH_LONG);
+            View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(Color.YELLOW);
+            snackbar.show();
+        }
+
+        auth = FirebaseAuth.getInstance();
+
+        //get current user
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null
+                    // launch login activity
+                    startActivity(new Intent(MainActivity.this, signup.class));
+                    finish();
+                }
+            }
+        };
+
+        String mailaddr="",useruid="";
+        if(user!=null) {mailaddr=user.getEmail();useruid=user.getUid();}
+        maildesc = (TextView)findViewById(R.id.useremail);
+        maildesc.setText(mailaddr);
+
+        naam = (TextView)findViewById(R.id.userName);
+        dbref.child("doctors").child(useruid).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String username = dataSnapshot.getValue(String.class);
+                naam.setText(username);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        String[] data={"Change password","Log out"};
+        String[] data={"Schedule","Notifications","Records","Emergency"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
 
         final ListView navList = (ListView) findViewById(R.id.navList);
@@ -75,10 +156,40 @@ public class MainActivity extends AppCompatActivity {
 
                 switch(pos){
                     case 0:
-                        Toast.makeText(MainActivity.this, "change pass", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawers();
+                        viewPager.setCurrentItem(0);
                         break;
                     case 1:
-                        Toast.makeText(MainActivity.this, "log out", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawers();
+                        viewPager.setCurrentItem(1);
+                        break;
+                    case 2:
+                        drawerLayout.closeDrawers();
+                        viewPager.setCurrentItem(2);
+                        break;
+                    case 3:
+                        drawerLayout.closeDrawers();
+                        viewPager.setCurrentItem(3);
+                        break;
+
+                }
+            }
+        });
+
+        String[] data2={"Change Password","Log out"};
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data2);
+        final ListView navList2 = (ListView) findViewById(R.id.navList2);
+        navList2.setAdapter(adapter2);
+        navList2.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int pos,long id){
+
+                switch(pos){
+                    case 0:
+                        startActivity(new Intent(MainActivity.this,changepassword.class));
+                        break;
+                    case 1:
+                        signOut();
                         break;
 
                 }
@@ -121,6 +232,64 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+
+        Snackbar snackbar=Snackbar.make(drawerLayout, "Tap back again to exit.", Snackbar.LENGTH_LONG);
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        snackbar.show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
+
+    //sign out method
+    public void signOut() {
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Signing out...");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.show();
+        pd.setCancelable(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(1000);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                auth.signOut();
+                pd.dismiss();
+            }
+        }).start();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authListener != null) {
+            auth.removeAuthStateListener(authListener);
         }
     }
 

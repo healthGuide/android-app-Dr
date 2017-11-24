@@ -76,7 +76,7 @@ public class checkrecord extends AppCompatActivity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if((event.getAction()==KeyEvent.ACTION_DOWN)&&(keyCode==KeyEvent.KEYCODE_ENTER))
                 {
-                    addsearchinput(mail.getText().toString());
+                    addsearchinput(mail.getText().toString().trim());
                     return true;
                 }
                 return false;
@@ -152,7 +152,7 @@ public class checkrecord extends AppCompatActivity {
                 }
                 else{
                     Intent chka = new Intent(checkrecord.this, recorddata.class);
-                    history.add(mail.getText().toString());
+                    history.add(mail.getText().toString().trim());
                     chka.putExtra("fromdate", fdt.getText().toString());
                     chka.putExtra("todate", tdt.getText().toString());
                     chka.putExtra("patient",mail.getText().toString());

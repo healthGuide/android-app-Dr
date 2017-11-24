@@ -88,13 +88,29 @@
         <ListView
             android:id="@+id/navList"
             android:layout_width="280dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/profileBox"
             android:choiceMode="singleChoice"
             android:background="#ffffff"
             android:divider="@null"
             />
 
+        <View
+            android:id="@+id/divider"
+            android:layout_below="@+id/navList"
+            android:layout_width="280dp"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <ListView
+            android:id="@+id/navList2"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/divider"
+            android:choiceMode="singleChoice"
+            android:background="#ffffff"
+            android:divider="@null"
+            />
     </RelativeLayout>
 
 </android.support.v4.widget.DrawerLayout>
