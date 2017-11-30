@@ -17,6 +17,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -146,7 +147,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         String[] data={"Schedule","Notifications","Records","Emergency"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
+        Integer[] images={R.drawable.schedicon,R.drawable.notificon,R.drawable.recordicon,R.drawable.emergicon};
+
+        Draweradapter adapter = new Draweradapter(MainActivity.this,data,images);
 
         final ListView navList = (ListView) findViewById(R.id.navList);
         navList.setAdapter(adapter);
@@ -177,7 +180,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         String[] data2={"Change Password","Log out"};
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data2);
+
+        Integer[] images2={R.drawable.settings,R.drawable.logicon};
+
+        Draweradapter adapter2 = new Draweradapter(MainActivity.this,data2,images2);
+
         final ListView navList2 = (ListView) findViewById(R.id.navList2);
         navList2.setAdapter(adapter2);
         navList2.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -237,25 +244,31 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
+
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawers();
         }
-
-        this.doubleBackToExitPressedOnce = true;
-
-        Snackbar snackbar=Snackbar.make(drawerLayout, "Tap back again to exit.", Snackbar.LENGTH_LONG);
-        View sbView = snackbar.getView();
-        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(Color.WHITE);
-        snackbar.show();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
+        else {
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
             }
-        }, 2000);
+
+            this.doubleBackToExitPressedOnce = true;
+
+            Snackbar snackbar = Snackbar.make(drawerLayout, "Tap back again to exit.", Snackbar.LENGTH_LONG);
+            View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(Color.WHITE);
+            snackbar.show();
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        }
     }
 
     //sign out method
