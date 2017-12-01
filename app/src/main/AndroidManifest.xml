@@ -33,10 +33,11 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".resetpassword"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".changepassword"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".settings"></activity>
     </application>
 
 </manifest>

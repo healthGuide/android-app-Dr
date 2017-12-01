@@ -26,10 +26,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     private TextView maildesc;
     TextView naam;
+    String useruid="";
 
     FirebaseDatabase database;
     DatabaseReference dbref;
@@ -121,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        String mailaddr="",useruid="";
+        String mailaddr="";
         if(user!=null) {mailaddr=user.getEmail();useruid=user.getUid();}
         maildesc = (TextView)findViewById(R.id.useremail);
         maildesc.setText(mailaddr);
@@ -179,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String[] data2={"Change Password","Log out"};
+        String[] data2={"Settings","Log out"};
 
         Integer[] images2={R.drawable.settings,R.drawable.logicon};
 
@@ -193,12 +192,14 @@ public class MainActivity extends AppCompatActivity {
 
                 switch(pos){
                     case 0:
-                        startActivity(new Intent(MainActivity.this,changepassword.class));
+                        Intent settingsintent = new Intent(MainActivity.this,settings.class);
+                        settingsintent.putExtra("mailid",maildesc.getText().toString());
+                        settingsintent.putExtra("naam",naam.getText().toString());
+                        startActivity(settingsintent);
                         break;
                     case 1:
                         signOut();
                         break;
-
                 }
             }
         });
@@ -316,5 +317,23 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig){
         super.onConfigurationChanged(newConfig);
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        dbref.child("doctors").child(useruid).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String username = dataSnapshot.getValue(String.class);
+                naam.setText(username);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

@@ -100,7 +100,7 @@
             android:layout_below="@+id/navList"
             android:layout_width="280dp"
             android:layout_height="1dp"
-            android:background="#f0f0f0"/>
+            android:background="#e0e0e0"/>
 
         <ListView
             android:id="@+id/navList2"
