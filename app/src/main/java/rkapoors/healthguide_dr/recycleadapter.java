@@ -37,10 +37,10 @@ public class recycleadapter extends RecyclerView.Adapter<recycleadapter.MyHoder>
     public void onBindViewHolder(MyHoder holder, int position) {
         checkrecorddata mylist = list.get(position);
         holder.dt.setText(mylist.getdt());
-        holder.tm.setText(mylist.gettm());
+        holder.tm.setText(mylist.gettime());
         holder.comm.setText(mylist.getcomment());
-        holder.gr.setText(mylist.getglucoreading());
-        holder.dsg.setText(mylist.getothercm());
+        holder.gr.setText(mylist.getvalue());
+        holder.dsg.setText(mylist.getdosage());
     }
 
     @Override

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/contactview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#fff">
+
+    <Button
+        android:id="@+id/contactbt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose from Contacts"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_centerHorizontal="true"
+        android:padding="15dp"
+        android:textAllCaps="false"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/ortv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or"
+        android:textSize="18sp"
+        android:layout_below="@+id/contactbt"
+        android:textColor="#000"
+        android:layout_centerHorizontal="true"
+        android:padding="8dp"
+        />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ortv"
+        android:id="@+id/namelayout">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:inputType="textEmailAddress"
+            android:textColor="#000"
+            android:textColorHint="#000" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/namelayout"
+        android:id="@+id/phonelayout">
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone number"
+            android:inputType="phone"
+            android:textColor="#000"
+            android:textColorHint="#000" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/addbt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phonelayout"
+        android:text="ADD"
+        android:textColor="#fff"
+        android:background="#125786"
+        android:textSize="18sp"
+        android:paddingTop="5dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/insttv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addbt"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:text="Location will be shared with contacts in emergency"/>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/insttv"
+        android:choiceMode="singleChoice"
+        android:background="#ffffff"
+        android:divider="#d0d0d0"
+        android:dividerHeight="2dp"
+        />
+
+
+</RelativeLayout>

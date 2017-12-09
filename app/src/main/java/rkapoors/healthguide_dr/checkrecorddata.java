@@ -29,32 +29,30 @@ public class checkrecorddata {
         this.dt = dt;
     }
 
-    public String gettm(){
+    public String gettime(){
         return time;
     }
-    public void settm(String tm){
-        this.time=tm;
+    public void settime(String time){
+        this.time=time;
     }
 
     public String getcomment(){
         return comment;
     }
-    public void setcomment(String cm){
-        this.comment=cm;
+    public void setcomment(String comment){
+        this.comment=comment;
     }
 
-    public String getglucoreading(){
+    public String getvalue(){
         return value;
     }
-    public void setglucoreading(String gr){
-        this.value=gr;
-    }
+    public void setvalue(String value){this.value=value;}
 
-    public String getothercm(){
+    public String getdosage(){
         return dosage;
     }
-    public void setothercm(String ocm){
-        this.dosage=ocm;
+    public void setdosage(String dosage){
+        this.dosage=dosage;
     }
 }
 

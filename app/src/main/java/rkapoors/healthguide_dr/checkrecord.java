@@ -1,12 +1,15 @@
 package rkapoors.healthguide_dr;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +25,14 @@ import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -30,15 +41,22 @@ import java.util.Set;
 
 public class checkrecord extends AppCompatActivity {
 
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
+
     int selectedYear;
     int selectedMonth;
     int selectedDayOfMonth;
     public TextView fdt;
     public TextView tdt;
 
+    int flg;
+
     AutoCompleteTextView mail;
     private SharedPreferences patients;
     private Set<String> history;
+
+    String patientuid="",uidofuser="",mailofuser="", patientmail="";
 
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
@@ -55,6 +73,13 @@ public class checkrecord extends AppCompatActivity {
         if(actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {uidofuser = user.getUid();mailofuser=user.getEmail();}
+
+        database=FirebaseDatabase.getInstance();
+        databaseReference=database.getReference();
+
         Calendar c = Calendar.getInstance();
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         selectedYear=c.get(Calendar.YEAR);
@@ -128,6 +153,8 @@ public class checkrecord extends AppCompatActivity {
         chk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                flg=0;
+                patientmail = mail.getText().toString().trim();
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(relativeLayout.getWindowToken(), 0);
@@ -151,15 +178,80 @@ public class checkrecord extends AppCompatActivity {
                     snackbar.show();
                 }
                 else{
-                    Intent chka = new Intent(checkrecord.this, recorddata.class);
-                    history.add(mail.getText().toString().trim());
-                    chka.putExtra("fromdate", fdt.getText().toString());
-                    chka.putExtra("todate", tdt.getText().toString());
-                    chka.putExtra("patient",mail.getText().toString());
-                    startActivity(chka);
+                    fetchrecord task = new fetchrecord(checkrecord.this);
+                    task.execute();
                 }
             }
         });
+    }
+
+
+    private class fetchrecord extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pd;
+
+        public fetchrecord(checkrecord activity){
+            pd = new ProgressDialog(activity);
+        }
+
+        @Override
+        protected void onPreExecute(){
+            pd.setMessage("Please wait a moment...");
+            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected void onPostExecute(Void result){
+            super.onPostExecute(result);
+            Handler handler = new Handler();
+
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    pd.dismiss();
+
+                    if(flg==1)
+                    {
+                    Intent chka = new Intent(checkrecord.this, recorddata.class);
+                    history.add(patientmail);
+                    chka.putExtra("fromdate", fdt.getText().toString());
+                    chka.putExtra("todate", tdt.getText().toString());
+                    chka.putExtra("patient",patientmail);
+                    chka.putExtra("patientuid",patientuid);
+                    startActivity(chka);
+                    }
+                    else
+                        Snackbar.make(relativeLayout,"Patient has not authorized you.",Snackbar.LENGTH_LONG).show();
+                }
+            },500);    //show for atlest 500 msec
+        }
+
+        @Override
+        protected Void doInBackground(Void... params){
+            try{
+                databaseReference.child("doctors").child(uidofuser).child("patients").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot ds : dataSnapshot.getChildren()){
+                            if(ds.child("email").getValue(String.class).equals(patientmail)){
+                                flg=1;
+                                patientuid = ds.child("uid").getValue(String.class);
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
     private void setautocompletesource()
