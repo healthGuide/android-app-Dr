@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -37,6 +38,7 @@ public class people extends AppCompatActivity {
 
     final Context context = this;
     RelativeLayout relativeLayout;
+    Button rldbutton;
     ListView ls;
 
     @Override
@@ -45,6 +47,7 @@ public class people extends AppCompatActivity {
         setContentView(R.layout.activity_people);
 
         relativeLayout = (RelativeLayout)findViewById(R.id.pplview);
+        rldbutton = (Button)findViewById(R.id.rfbt);
         ls=(ListView)findViewById(R.id.ppllist);
 
         setTitle("People");
@@ -68,57 +71,16 @@ public class people extends AppCompatActivity {
         fetchrecord task = new fetchrecord(people.this);
         task.execute();
 
-        /*ls.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        rldbutton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int pos, long l) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
-                // set dialog message
-                        alertDialogBuilder
-                        .setTitle("Sure to delete ?")
-                        .setMessage(""+ls.getItemAtPosition(pos))
-                        .setCancelable(true)
-                        .setPositiveButton("DELETE",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        temp.addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                                for (DataSnapshot ds : dataSnapshot.getChildren()){
-                                                    if(ds.child("email").getValue(String.class).equals(ls.getItemAtPosition(pos))){
-                                                        temp.child(ds.getKey()).removeValue();
-                                                        break;
-                                                    }
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onCancelled(DatabaseError databaseError) {
-
-                                            }
-                                        });
-                                        patientlist.remove(pos);
-                                        adapter.notifyDataSetChanged();
-                                        Snackbar.make(relativeLayout,"Deleted.",Snackbar.LENGTH_LONG).show();
-                                    }
-                                })
-                        .setNegativeButton("CANCEL",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                // show it
-                alertDialog.show();
-
-                return true;
+            public void onClick(View view) {
+                patientlist = new ArrayList<>();
+                fetchrecord task = new fetchrecord(people.this);
+                task.execute();
             }
-        });*/
-    }
+        });
 
+    }
 
     private class fetchrecord extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pd;

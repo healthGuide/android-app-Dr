@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/docrec"
+        android:id="@+id/splimg"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splimg"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:text="healthGuide-Dr"
+        android:textColor="#125688"
+        android:textStyle="bold"
+        android:id="@+id/spltxt"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spltxt"
+        android:layout_centerHorizontal="true"
+        android:text="always with you"
+        android:textColor="#12568f"
+        android:id="@+id/spltxt1"/>
+</RelativeLayout>
