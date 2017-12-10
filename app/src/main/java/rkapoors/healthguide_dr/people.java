@@ -68,9 +68,6 @@ public class people extends AppCompatActivity {
         adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,patientlist);
         ls.setAdapter(adapter);
 
-        fetchrecord task = new fetchrecord(people.this);
-        task.execute();
-
         rldbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +76,9 @@ public class people extends AppCompatActivity {
                 task.execute();
             }
         });
+
+        fetchrecord task = new fetchrecord(people.this);
+        task.execute();
 
     }
 

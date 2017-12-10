@@ -3,6 +3,7 @@ package rkapoors.healthguide_dr;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -21,6 +22,8 @@ public class splash extends Activity {      //extend AppCompatActivity to displa
         splimg=(ImageView)findViewById(R.id.splimg);
         spltxt=(TextView)findViewById(R.id.spltxt);
         spltxt1=(TextView)findViewById(R.id.spltxt1);
+        spltxt.setVisibility(View.INVISIBLE);
+        spltxt1.setVisibility(View.INVISIBLE);
         final Animation fadein = AnimationUtils.loadAnimation(getBaseContext(),R.anim.fade_out);
         final Animation fadein1 = AnimationUtils.loadAnimation(getBaseContext(),R.anim.fade_out1);
 
@@ -33,6 +36,8 @@ public class splash extends Activity {      //extend AppCompatActivity to displa
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                spltxt.setVisibility(View.VISIBLE);
+                spltxt1.setVisibility(View.VISIBLE);
                 spltxt.startAnimation(fadein1);
                 spltxt1.startAnimation(fadein1);
             }
