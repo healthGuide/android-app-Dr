@@ -69,7 +69,7 @@ public class recorddata extends AppCompatActivity {
         mailtv.setText(getIntent().getStringExtra("patient"));
         uidofpatient = getIntent().getStringExtra("patientuid");
 
-        df = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         try {
             fromtithi = df.parse(frdt.getText().toString());
             totithi = df.parse(todt.getText().toString());

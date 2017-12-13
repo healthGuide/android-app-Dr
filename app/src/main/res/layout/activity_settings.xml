@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/userimg"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/docrec"
             />
@@ -32,7 +32,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#000"
-            android:paddingTop="5dp"
+            android:paddingTop="2dp"
             android:text="User"/>
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_centerHorizontal="true"
             android:textSize="15sp"
             android:textColor="#000"
-            android:paddingTop="5dp"
+            android:paddingTop="2dp"
             android:text="Email"/>
 
     </RelativeLayout>
