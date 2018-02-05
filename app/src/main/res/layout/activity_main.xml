@@ -50,8 +50,8 @@
         <RelativeLayout
             android:id="@+id/profileBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#125688"
+            android:layout_height="150dp"
+            android:background="@drawable/profileimg"
             android:padding="8dp"
             >
 
@@ -100,7 +100,7 @@
             android:layout_below="@+id/navList"
             android:layout_width="280dp"
             android:layout_height="1dp"
-            android:background="#e0e0e0"/>
+            android:background="#bbbbbb"/>
 
         <ListView
             android:id="@+id/navList2"

@@ -22,8 +22,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".splash">
+        <activity android:name=".splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,7 +50,7 @@
             android:name=".contacts"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".people" />
-
+        <activity android:name=".aboutus"></activity>
     </application>
 
 </manifest>

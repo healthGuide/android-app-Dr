@@ -117,7 +117,7 @@ public class people extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for(DataSnapshot ds : dataSnapshot.getChildren()){
-                            patientlist.add(ds.child("email").getValue(String.class));
+                            patientlist.add(ds.child("name").getValue(String.class)+"\n"+ds.child("email").getValue(String.class));
                         }
                     }
 

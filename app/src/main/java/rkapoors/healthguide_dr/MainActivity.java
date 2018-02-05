@@ -4,7 +4,9 @@ package rkapoors.healthguide_dr;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -22,6 +24,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
+    final Context context = this;
 
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
@@ -114,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(MainActivity.this, signup.class));
+                    startActivity(new Intent(MainActivity.this, login.class));
                     finish();
                 }
             }
@@ -178,9 +183,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String[] data2={"Settings","Log out"};
+        String[] data2={"Settings","About us","Log out"};
 
-        Integer[] images2={R.drawable.settings,R.drawable.logicon};
+        Integer[] images2={R.drawable.settings,R.drawable.information,R.drawable.logicon};
 
         Draweradapter adapter2 = new Draweradapter(MainActivity.this,data2,images2);
 
@@ -198,7 +203,33 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(settingsintent);
                         break;
                     case 1:
-                        signOut();
+                        Intent abtact = new Intent(MainActivity.this,aboutus.class);
+                        startActivity(abtact);
+                        break;
+                    case 2:
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                        // set dialog message
+                        alertDialogBuilder
+                                .setTitle("Log out")
+                                .setMessage("Sure to Log out ?")
+                                .setCancelable(true)
+                                .setPositiveButton("Log out",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog,int id) {
+                                                signOut();
+                                            }
+                                        })
+                                .setNegativeButton("Cancel",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog,int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+
+                        // create alert dialog
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        // show it
+                        alertDialog.show();
                         break;
                 }
             }
