@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="50dp"
                 android:textStyle="italic"
                 android:textSize="18sp"
                 android:padding="10dp"
@@ -108,18 +108,27 @@
                 android:textColor="#000"
                 />
 
+            <View
+                android:id="@+id/divider"
+                android:layout_below="@+id/todt"
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:background="#125688"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"/>
+
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="60dp"
-                android:text="CHECK"
+                android:text="Check"
                 android:id="@+id/chk"
                 android:textStyle="bold"
+                android:textAllCaps="false"
                 android:textColor="#125688"
                 android:background="@null"
                 android:textSize="25sp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
-                android:layout_below="@+id/tobt"
+                android:layout_below="@+id/divider"
                 />
         </RelativeLayout>
     </LinearLayout>

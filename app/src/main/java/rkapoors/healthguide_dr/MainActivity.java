@@ -150,8 +150,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        String[] data={"Schedule","Notifications","Records","Emergency"};
-        Integer[] images={R.drawable.schedicon,R.drawable.notificon,R.drawable.recordicon,R.drawable.emergicon};
+        String[] data={"Schedule","Notifications","Records","Emergency","","Settings","About us","Log out"};
+        Integer[] images={R.drawable.schedicon,R.drawable.notificon,R.drawable.recordicon,R.drawable.emergicon,R.drawable.lineimg,
+                R.drawable.settings,R.drawable.information,R.drawable.logicon,};
 
         Draweradapter adapter = new Draweradapter(MainActivity.this,data,images);
 
@@ -178,35 +179,17 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         viewPager.setCurrentItem(3);
                         break;
-
-                }
-            }
-        });
-
-        String[] data2={"Settings","About us","Log out"};
-
-        Integer[] images2={R.drawable.settings,R.drawable.information,R.drawable.logicon};
-
-        Draweradapter adapter2 = new Draweradapter(MainActivity.this,data2,images2);
-
-        final ListView navList2 = (ListView) findViewById(R.id.navList2);
-        navList2.setAdapter(adapter2);
-        navList2.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int pos,long id){
-
-                switch(pos){
-                    case 0:
+                    case 5:
                         Intent settingsintent = new Intent(MainActivity.this,settings.class);
                         settingsintent.putExtra("mailid",maildesc.getText().toString());
                         settingsintent.putExtra("naam",naam.getText().toString());
                         startActivity(settingsintent);
                         break;
-                    case 1:
+                    case 6:
                         Intent abtact = new Intent(MainActivity.this,aboutus.class);
                         startActivity(abtact);
                         break;
-                    case 2:
+                    case 7:
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                         // set dialog message
                         alertDialogBuilder
