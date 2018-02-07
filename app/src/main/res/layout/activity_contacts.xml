@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="#fff">
+    android:background="@drawable/recimg">
 
     <Button
         android:id="@+id/contactbt"
@@ -82,6 +82,7 @@
         android:layout_below="@+id/addbt"
         android:layout_centerHorizontal="true"
         android:padding="5dp"
+        android:textColor="#444"
         android:text="Location will be shared with contacts in emergency"/>
 
     <ListView
