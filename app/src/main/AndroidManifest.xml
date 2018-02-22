@@ -50,7 +50,8 @@
             android:name=".contacts"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".people" />
-        <activity android:name=".aboutus"></activity>
+        <activity android:name=".aboutus" />
+        <activity android:name=".notification"></activity>
     </application>
 
 </manifest>

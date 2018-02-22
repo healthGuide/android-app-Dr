@@ -168,16 +168,15 @@ public class MainActivity extends AppCompatActivity {
                         viewPager.setCurrentItem(0);
                         break;
                     case 1:
-                        drawerLayout.closeDrawers();
-                        viewPager.setCurrentItem(1);
+                        startActivity(new Intent(MainActivity.this,notification.class));
                         break;
                     case 2:
                         drawerLayout.closeDrawers();
-                        viewPager.setCurrentItem(2);
+                        viewPager.setCurrentItem(1);
                         break;
                     case 3:
                         drawerLayout.closeDrawers();
-                        viewPager.setCurrentItem(3);
+                        viewPager.setCurrentItem(2);
                         break;
                     case 5:
                         Intent settingsintent = new Intent(MainActivity.this,settings.class);
@@ -222,7 +221,6 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ScheduleFragment(), "Schedule");
-        adapter.addFragment(new NotificationFragment(), "Notification");
         adapter.addFragment(new RecordFragment(), "Records");
         adapter.addFragment(new EmergencyFragment(), "Emergency");
         viewPager.setAdapter(adapter);
