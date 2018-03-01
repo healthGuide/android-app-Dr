@@ -1,0 +1,24 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="rkapoors.healthguide_dr.grview">
+
+    <org.eazegraph.lib.charts.ValueLineChart
+        android:padding="10dp"
+        android:id="@+id/cubiclinechart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:egUseOverlapFill="true"
+        app:egUseCubic="true"
+        app:egCurveSmoothness="0.25"
+        app:egIndicatorLineColor="#F00"
+        app:egIndicatorTextColor="#F00"
+        app:egLegendHeight="40dp"
+        app:egShowStandardValue="true"
+        app:egIndicatorTextUnit="mg/dL"
+        app:egShowLegendBeneathIndicator="true"/>
+
+</LinearLayout>

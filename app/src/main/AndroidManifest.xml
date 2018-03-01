@@ -51,7 +51,10 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".people" />
         <activity android:name=".aboutus" />
-        <activity android:name=".notification"></activity>
+        <activity android:name=".notification" />
+        <activity
+            android:name=".grview"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

@@ -107,7 +107,7 @@ public class people extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                     pd.dismiss();
                 }
-            },500);    //show for atlest 500 msec
+            },5000);    //show for atlest 500 msec
         }
 
         @Override

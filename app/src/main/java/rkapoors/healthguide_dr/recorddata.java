@@ -1,8 +1,10 @@
 package rkapoors.healthguide_dr;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -91,6 +93,14 @@ public class recorddata extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton grbt = (FloatingActionButton)findViewById(R.id.grbt);
+        grbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gract = new Intent(recorddata.this,grview.class);
+                startActivity(gract);
+            }
+        });
     }
 
     private class fetchrecord extends AsyncTask<Void, Void, Void> {
@@ -129,7 +139,7 @@ public class recorddata extends AppCompatActivity {
                         Snackbar.make(relativeLayout,"Check Connection or Constraints.",Snackbar.LENGTH_LONG).show();
                     }
                 }
-            },500);    //show for atlest 500 msec
+            },5000);    //show for atlest 500 msec
         }
 
         @Override

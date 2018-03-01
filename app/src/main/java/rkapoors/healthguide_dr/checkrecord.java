@@ -223,7 +223,7 @@ public class checkrecord extends AppCompatActivity {
                     else
                         Snackbar.make(relativeLayout,"Patient has not authorized you.",Snackbar.LENGTH_LONG).show();
                 }
-            },500);    //show for atlest 500 msec
+            },5000);    //show for atlest 500 msec
         }
 
         @Override

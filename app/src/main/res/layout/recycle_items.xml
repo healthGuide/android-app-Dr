@@ -40,7 +40,7 @@
             android:textSize="15sp"
             android:textColor="#000"
             android:padding="1dp"
-            android:text="Time: "
+            android:text="time: "
             android:layout_below="@+id/dttv"
             android:layout_alignParentStart="true"/>
 
@@ -62,7 +62,7 @@
             android:textSize="15sp"
             android:textColor="#000"
             android:padding="1dp"
-            android:text="Comment: "
+            android:text="comment: "
             android:layout_below="@+id/tm"/>
 
         <TextView
@@ -83,7 +83,7 @@
             android:textSize="15sp"
             android:textColor="#000"
             android:padding="1dp"
-            android:text="Dosage: "
+            android:text="insulin dosage: "
             android:layout_below="@+id/cm"/>
 
         <TextView
@@ -92,8 +92,22 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:textColor="#000"
+            android:textStyle="bold"
             android:padding="1dp"
             android:layout_toEndOf="@+id/other"
+            android:layout_below="@+id/cm"
+            />
+
+        <TextView
+            android:id="@+id/unittv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:padding="1dp"
+            android:text=" units"
+            android:layout_toEndOf="@+id/othercmtv"
             android:layout_below="@+id/cm"
             />
 
@@ -104,7 +118,7 @@
             android:textSize="15sp"
             android:textColor="#000"
             android:padding="1dp"
-            android:text="Glucose Level: "
+            android:text="sugar level: "
             android:layout_below="@+id/other"/>
 
         <TextView
