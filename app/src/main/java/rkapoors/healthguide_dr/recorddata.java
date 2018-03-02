@@ -98,6 +98,7 @@ public class recorddata extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent gract = new Intent(recorddata.this,grview.class);
+                gract.putExtra("patientuid",uidofpatient);
                 startActivity(gract);
             }
         });

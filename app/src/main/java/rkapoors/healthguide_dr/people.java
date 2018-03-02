@@ -2,16 +2,13 @@ package rkapoors.healthguide_dr;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -32,6 +29,8 @@ public class people extends AppCompatActivity {
     DatabaseReference databaseReference,temp;
 
     String uidofuser="";
+
+    int flg=0;
 
     ArrayList<String> patientlist;
     ArrayAdapter<String> adapter;
@@ -71,6 +70,7 @@ public class people extends AppCompatActivity {
         rldbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                flg=0;
                 patientlist = new ArrayList<>();
                 fetchrecord task = new fetchrecord(people.this);
                 task.execute();
@@ -104,7 +104,8 @@ public class people extends AppCompatActivity {
 
             handler.postDelayed(new Runnable() {
                 public void run() {
-                    adapter.notifyDataSetChanged();
+                    if(flg==1) adapter.notifyDataSetChanged();
+                    else Snackbar.make(relativeLayout,"Something went wrong. Try again.",Snackbar.LENGTH_LONG).show();
                     pd.dismiss();
                 }
             },5000);    //show for atlest 500 msec
@@ -119,6 +120,7 @@ public class people extends AppCompatActivity {
                         for(DataSnapshot ds : dataSnapshot.getChildren()){
                             patientlist.add(ds.child("name").getValue(String.class)+"\n"+ds.child("email").getValue(String.class));
                         }
+                        flg=1;
                     }
 
                     @Override
