@@ -121,9 +121,9 @@ public class grview extends AppCompatActivity {
 
                         for(DataSnapshot ds : dataSnapshot.getChildren())
                         {
-                            tithi.add(ds.getKey());
                             for(DataSnapshot dts : ds.getChildren())
                             {
+                                tithi.add(ds.getKey());
                                 val.add(dts.child("value").getValue(String.class));
                             }
                         }
