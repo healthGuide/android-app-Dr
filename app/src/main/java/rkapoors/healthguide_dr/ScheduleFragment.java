@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class ScheduleFragment extends Fragment {
 
     private static View mView;
+    ImageView schedico;
 
     public ScheduleFragment() {
         // Required empty public constructor
@@ -35,6 +37,16 @@ public class ScheduleFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        schedico = (ImageView)mView.findViewById(R.id.sched);
+        schedico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent schedact = new Intent(getActivity(),schedfetch.class);
+                startActivity(schedact);
+            }
+        });
+
         return  mView;
     }
 }

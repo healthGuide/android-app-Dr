@@ -54,7 +54,8 @@
         <activity android:name=".notification" />
         <activity
             android:name=".grview"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
+        <activity android:name=".schedfetch"></activity>
     </application>
 
 </manifest>
