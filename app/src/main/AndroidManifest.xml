@@ -45,9 +45,12 @@
         <activity
             android:name=".changepassword"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".settings" />
+        <activity
+            android:name=".settings"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".contacts"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".people" />
         <activity android:name=".aboutus" />
@@ -55,7 +58,9 @@
         <activity
             android:name=".grview"
             android:screenOrientation="landscape" />
-        <activity android:name=".schedfetch"></activity>
+        <activity
+            android:name=".schedfetch"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

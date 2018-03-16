@@ -117,10 +117,13 @@ public class contacts extends AppCompatActivity {
             }
         });
 
+        EnableRuntimePermission();
+
         choosebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EnableRuntimePermission();
+                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                startActivityForResult(intent, 7);
             }
         });
 
@@ -166,8 +169,7 @@ public class contacts extends AppCompatActivity {
         if (ActivityCompat.shouldShowRequestPermissionRationale(contacts.this, android.Manifest.permission.READ_CONTACTS))
         {
             //Toast.makeText(contacts.this,"CONTACTS permission allows us to Access CONTACTS app", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-            startActivityForResult(intent, 7);
+
         } else {
 
             ActivityCompat.requestPermissions(contacts.this,new String[]{android.Manifest.permission.READ_CONTACTS}, RequestPermissionCode);
@@ -185,8 +187,8 @@ public class contacts extends AppCompatActivity {
                 if (PResult.length > 0 && PResult[0] == PackageManager.PERMISSION_GRANTED) {
 
                     //Toast.makeText(contacts.this,"Permission Granted, Now your application can access CONTACTS.", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-                    startActivityForResult(intent, 7);
+//                    Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+//                    startActivityForResult(intent, 7);
                 } else {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                     // set dialog message

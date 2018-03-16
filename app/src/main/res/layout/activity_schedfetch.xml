@@ -25,6 +25,228 @@
             />
     </android.support.design.widget.TextInputLayout>
 
+    <TableLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mailet">
+
+        <TableRow
+            android:padding="8dp"
+            android:paddingBottom="11dp">
+
+            <TextView
+                android:id="@+id/datetv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#125788"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="Date and time : "
+                />
+
+            <TextView
+                android:id="@+id/dateresp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="dummy"
+                />
+
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+    <TextView
+        android:id="@+id/fastingtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#125788"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="fasting sugar level check : "
+        />
+
+    <TextView
+        android:id="@+id/fastingresp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textSize="16sp"
+        android:text="dummy"
+        />
+
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+    <TextView
+        android:id="@+id/recordtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#125788"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="record made : "
+        />
+
+    <TextView
+        android:id="@+id/recordresp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textSize="16sp"
+        android:text="dummy"
+        />
+
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+    <TextView
+        android:id="@+id/morningexctv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#125788"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="morning exercise : "
+        />
+
+    <TextView
+        android:id="@+id/morningexcresp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textSize="16sp"
+        android:text="dummy"
+        />
+
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+    <TextView
+        android:id="@+id/morninginstv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#125788"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="morning insulin dosage : "
+        />
+
+    <TextView
+        android:id="@+id/morninginsresp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textSize="16sp"
+        android:text="dummy"
+        />
+
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+    <TextView
+        android:id="@+id/afterinstv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#125788"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="afternoon insulin dosage : "
+        />
+
+    <TextView
+        android:id="@+id/afterinsresp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textSize="16sp"
+        android:text="dummy"
+        />
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+    <TextView
+        android:id="@+id/eveningexctv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#125788"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="evening exercise : "
+        />
+
+    <TextView
+        android:id="@+id/eveningexcresp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textSize="16sp"
+        android:text="dummy"
+        />
+
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+    <TextView
+        android:id="@+id/nightinstv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#125788"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="night-time insulin dosage : "
+
+        />
+
+    <TextView
+        android:id="@+id/nightinsresp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textSize="16sp"
+        android:text="dummy"
+        />
+        </TableRow>
+
+        <TableRow
+            android:padding="8dp">
+
+    <TextView
+        android:id="@+id/bedchktv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#125788"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="bed-time sugar level check : "
+        />
+
+    <TextView
+        android:id="@+id/bedchkresp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textSize="16sp"
+        android:text="dummy"
+        />
+
+        </TableRow>
+
+    </TableLayout>
+
     <View
         android:id="@+id/divider"
         android:layout_width="200dp"

@@ -75,6 +75,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/grimg"
         android:background="#000"
+        android:layout_margin="12dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>
