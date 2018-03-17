@@ -60,6 +60,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".schedfetch"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"/>
     </application>
 

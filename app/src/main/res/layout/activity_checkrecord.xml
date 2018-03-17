@@ -28,6 +28,7 @@
                 android:textColor="#000"
                 android:textColorHint="#000"
                 android:textStyle="italic"
+                android:completionThreshold="1"
                 />
         </android.support.design.widget.TextInputLayout>
 

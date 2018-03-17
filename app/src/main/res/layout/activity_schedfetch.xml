@@ -22,18 +22,18 @@
             android:textColorHint="#000"
             android:textSize="18sp"
             android:textStyle="italic"
+            android:completionThreshold="1"
             />
     </android.support.design.widget.TextInputLayout>
 
     <TableLayout
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mailet">
 
         <TableRow
-            android:padding="8dp"
-            android:paddingBottom="11dp">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/datetv"
@@ -50,8 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:textColor="#000"
                 android:textSize="16sp"
-                android:text="dummy"
                 />
 
         </TableRow>
@@ -66,16 +66,15 @@
         android:textColor="#125788"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:text="fasting sugar level check : "
+        android:text="fasting sugar check : "
         />
 
     <TextView
         android:id="@+id/fastingresp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
         android:textSize="16sp"
-        android:text="dummy"
+        android:textColor="#000"
         />
 
         </TableRow>
@@ -97,9 +96,8 @@
         android:id="@+id/recordresp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
         android:textSize="16sp"
-        android:text="dummy"
+        android:textColor="#000"
         />
 
         </TableRow>
@@ -120,9 +118,8 @@
         android:id="@+id/morningexcresp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
         android:textSize="16sp"
-        android:text="dummy"
+        android:textColor="#000"
         />
 
         </TableRow>
@@ -137,16 +134,15 @@
         android:textColor="#125788"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:text="morning insulin dosage : "
+        android:text="morning insulin : "
         />
 
     <TextView
         android:id="@+id/morninginsresp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
         android:textSize="16sp"
-        android:text="dummy"
+        android:textColor="#000"
         />
 
         </TableRow>
@@ -161,16 +157,15 @@
         android:textColor="#125788"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:text="afternoon insulin dosage : "
+        android:text="afternoon insulin : "
         />
 
     <TextView
         android:id="@+id/afterinsresp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
         android:textSize="16sp"
-        android:text="dummy"
+        android:textColor="#000"
         />
         </TableRow>
 
@@ -190,9 +185,8 @@
         android:id="@+id/eveningexcresp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
         android:textSize="16sp"
-        android:text="dummy"
+        android:textColor="#000"
         />
 
         </TableRow>
@@ -207,7 +201,7 @@
         android:textColor="#125788"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:text="night-time insulin dosage : "
+        android:text="night-time insulin : "
 
         />
 
@@ -215,9 +209,8 @@
         android:id="@+id/nightinsresp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
         android:textSize="16sp"
-        android:text="dummy"
+        android:textColor="#000"
         />
         </TableRow>
 
@@ -231,16 +224,15 @@
         android:textColor="#125788"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:text="bed-time sugar level check : "
+        android:text="bed-time sugar check : "
         />
 
     <TextView
         android:id="@+id/bedchkresp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
         android:textSize="16sp"
-        android:text="dummy"
+        android:textColor="#000"
         />
 
         </TableRow>
