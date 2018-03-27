@@ -92,6 +92,9 @@ public class checkrecord extends AppCompatActivity {
         relativeLayout=(RelativeLayout)findViewById(R.id.content);
 
         mail=(AutoCompleteTextView)findViewById(R.id.email);
+        String tp = getIntent().getStringExtra("mailid");
+        if(tp != null) mail.setText(tp);
+
         patients=getSharedPreferences("patientpref",0);
         history = new HashSet<String>(patients.getStringSet("patientkey", new HashSet<String>()));     //key, default value
         setautocompletesource();

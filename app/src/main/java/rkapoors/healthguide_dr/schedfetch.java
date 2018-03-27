@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -82,6 +83,9 @@ public class schedfetch extends AppCompatActivity {
         bchk = (TextView)findViewById(R.id.bedchkresp);
 
         mail=(AutoCompleteTextView)findViewById(R.id.email);
+        String tp = getIntent().getStringExtra("mailid");
+        if(tp != null) mail.setText(tp);
+
         patients=getSharedPreferences("patientpref",0);
         history = new HashSet<String>(patients.getStringSet("patientkey", new HashSet<String>()));     //key, default value
         setautocompletesource();
@@ -90,6 +94,9 @@ public class schedfetch extends AppCompatActivity {
         sbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(fact.getWindowToken(), 0);
 
                 flg = 0;
 
@@ -151,15 +158,29 @@ public class schedfetch extends AppCompatActivity {
                         databaseReference.child("users").child(patientuid).child("schedule").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                date.setText(dataSnapshot.child("date").getValue(String.class));
-                                fast.setText(dataSnapshot.child("fastingcheck").getValue(String.class));
-                                rec.setText(dataSnapshot.child("record").getValue(String.class));
-                                mx.setText(dataSnapshot.child("morningexc").getValue(String.class));
-                                ms.setText(dataSnapshot.child("morninginsulin").getValue(String.class));
-                                as.setText(dataSnapshot.child("nooninsulin").getValue(String.class));
-                                ex.setText(dataSnapshot.child("eveningexc").getValue(String.class));
-                                ns.setText(dataSnapshot.child("nightinsulin").getValue(String.class));
-                                bchk.setText(dataSnapshot.child("bedtimecheck").getValue(String.class));
+                                String chkstr = dataSnapshot.child("date").getValue(String.class);
+                                if(chkstr!=null){
+                                    date.setText(chkstr);
+                                    fast.setText(dataSnapshot.child("fastingcheck").getValue(String.class));
+                                    rec.setText(dataSnapshot.child("record").getValue(String.class));
+                                    mx.setText(dataSnapshot.child("morningexc").getValue(String.class));
+                                    ms.setText(dataSnapshot.child("morninginsulin").getValue(String.class));
+                                    as.setText(dataSnapshot.child("nooninsulin").getValue(String.class));
+                                    ex.setText(dataSnapshot.child("eveningexc").getValue(String.class));
+                                    ns.setText(dataSnapshot.child("nightinsulin").getValue(String.class));
+                                    bchk.setText(dataSnapshot.child("bedtimecheck").getValue(String.class));
+                                }
+                                else {
+                                    date.setText("Schedule not recorded !");
+                                    fast.setText("-");
+                                    rec.setText("-");
+                                    mx.setText("-");
+                                    ms.setText("-");
+                                    as.setText("-");
+                                    ex.setText("-");
+                                    ns.setText("-");
+                                    bchk.setText("-");
+                                }
                             }
 
                             @Override

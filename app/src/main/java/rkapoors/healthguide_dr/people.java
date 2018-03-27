@@ -2,16 +2,23 @@ package rkapoors.healthguide_dr;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -80,6 +87,57 @@ public class people extends AppCompatActivity {
         fetchrecord task = new fetchrecord(people.this);
         task.execute();
 
+        ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                String dummystr = ls.getItemAtPosition(pos).toString();
+                String[] words=dummystr.split("\\n");    //splits the string based on string
+                final String patientkimail = words[1];
+
+                LayoutInflater li = LayoutInflater.from(context);
+                View promptsView = li.inflate(R.layout.promptspatient, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(promptsView);
+
+                final RadioGroup rg = (RadioGroup)promptsView.findViewById(R.id.chkrg);
+                rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                        RadioButton rb = (RadioButton) radioGroup.findViewById(checkedId);
+                        if (null != rb && checkedId > -1) {
+                            if(rb.getText().toString().equals("Records")) {
+                                Intent chkact = new Intent(people.this, checkrecord.class);
+                                chkact.putExtra("mailid",patientkimail);
+                                startActivity(chkact);
+                            }
+                            else{
+                                Intent schedact = new Intent(people.this, schedfetch.class);
+                                schedact.putExtra("mailid",patientkimail);
+                                startActivity(schedact);
+                            }
+                        }
+                    }
+                });
+
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(true)
+                        .setPositiveButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                // show it
+                alertDialog.show();
+
+            }
+        });
     }
 
     private class fetchrecord extends AsyncTask<Void, Void, Void> {
