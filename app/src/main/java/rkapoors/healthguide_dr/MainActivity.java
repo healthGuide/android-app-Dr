@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        String[] data={"Schedule","Notifications","Records","Emergency","________________________________","Settings & Info","About us","Log out"};
+        String[] data={"Schedule","Suggest","Records","Emergency","________________________________","Settings & Info","About us","Log out"};
         Integer[] images={R.drawable.schedicon,R.drawable.notificon,R.drawable.recordicon,R.drawable.emergicon,0,
                 R.drawable.settings,R.drawable.information,R.drawable.logicon,};
 

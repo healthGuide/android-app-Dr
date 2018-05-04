@@ -39,6 +39,16 @@
         android:textColor="#000"
         android:textAllCaps="false"
         />
+
+    <RadioButton
+        android:id="@+id/notifsbt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Suggest"
+        android:textSize="15sp"
+        android:textColor="#000"
+        android:textAllCaps="false"
+        />
     
 </RadioGroup>
 

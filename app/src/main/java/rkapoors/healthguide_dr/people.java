@@ -113,10 +113,15 @@ public class people extends AppCompatActivity {
                                 chkact.putExtra("mailid",patientkimail);
                                 startActivity(chkact);
                             }
-                            else{
+                            else if(rb.getText().toString().equals("Schedule")){
                                 Intent schedact = new Intent(people.this, schedfetch.class);
                                 schedact.putExtra("mailid",patientkimail);
                                 startActivity(schedact);
+                            }
+                            else{
+                                Intent sugact = new Intent(people.this, notification.class);
+                                sugact.putExtra("mailid",patientkimail);
+                                startActivity(sugact);
                             }
                         }
                     }
