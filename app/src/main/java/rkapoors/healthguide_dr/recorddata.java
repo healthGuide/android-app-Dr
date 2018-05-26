@@ -27,9 +27,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class recorddata extends AppCompatActivity {
 
@@ -42,10 +44,11 @@ public class recorddata extends AppCompatActivity {
     TextView frdt,todt,mailtv;
     RelativeLayout relativeLayout;
 
-    String uidofpatient="";
+    String uidofpatient="", prevdt="";
 
-    Date fromtithi, totithi, firebasetithi;
+    Date fromtithi, totithi, firebasetithi, prevdate;
     DateFormat df;
+    SimpleDateFormat dateFormatter;
 
     int flag=0;
 
@@ -71,10 +74,16 @@ public class recorddata extends AppCompatActivity {
         mailtv.setText(getIntent().getStringExtra("patient"));
         uidofpatient = getIntent().getStringExtra("patientuid");
 
+        dateFormatter = new SimpleDateFormat("yyyy-MM-dd",Locale.US);
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+5:30"));
+        cal.add(Calendar.DATE,-61);              //go back 61 days
+        prevdt = dateFormatter.format(cal.getTime());
+
         df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         try {
             fromtithi = df.parse(frdt.getText().toString());
             totithi = df.parse(todt.getText().toString());
+            prevdate = df.parse(prevdt);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -88,6 +97,7 @@ public class recorddata extends AppCompatActivity {
         ftbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                flag=0;
                 fetchrecord task = new fetchrecord(recorddata.this);
                 task.execute();
             }
@@ -159,7 +169,11 @@ public class recorddata extends AppCompatActivity {
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
-                            if(firebasetithi.compareTo(fromtithi)>=0 && firebasetithi.compareTo(totithi)<=0) {
+
+                            if(prevdate.compareTo(firebasetithi)>=0){
+                                ds.getRef().setValue(null);
+                            }
+                            else if(firebasetithi.compareTo(fromtithi)>=0 && firebasetithi.compareTo(totithi)<=0) {
                                 for (DataSnapshot dts : ds.getChildren()) {
                                     checkrecorddata value = dts.getValue(checkrecorddata.class);
                                     checkrecorddata temp = new checkrecorddata();

@@ -70,15 +70,10 @@ public class people extends AppCompatActivity {
 
         temp=databaseReference.child("doctors").child(uidofuser).child("patients");
 
-        patientlist = new ArrayList<>();
-        adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,patientlist);
-        ls.setAdapter(adapter);
-
         rldbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 flg=0;
-                patientlist = new ArrayList<>();
                 fetchrecord task = new fetchrecord(people.this);
                 task.execute();
             }
@@ -167,7 +162,11 @@ public class people extends AppCompatActivity {
 
             handler.postDelayed(new Runnable() {
                 public void run() {
-                    if(flg==1) adapter.notifyDataSetChanged();
+                    if(flg==1) {
+                        adapter=new ArrayAdapter<>(people.this,android.R.layout.simple_list_item_1,patientlist);
+                        ls.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
                     else Snackbar.make(relativeLayout,"Something went wrong. Try again.",Snackbar.LENGTH_LONG).show();
                     pd.dismiss();
                 }
@@ -180,6 +179,7 @@ public class people extends AppCompatActivity {
                 temp.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        patientlist = new ArrayList<>();
                         for(DataSnapshot ds : dataSnapshot.getChildren()){
                             patientlist.add(ds.child("name").getValue(String.class)+"\n"+ds.child("email").getValue(String.class));
                         }
